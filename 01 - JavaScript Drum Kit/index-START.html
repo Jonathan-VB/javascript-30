@@ -58,7 +58,27 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+  function playSound(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
 
+    if( !audio ) return;           // Stop the function from running if there are no data-keys matching the key pressasd.
+    audio.currentTime = 0;         // Rewind audio to the start.
+    audio.play();                  // Play the audio.
+    key.classList.add('playing');  // Add the class 'playing'.
+  }
+
+  function removeTransition(e) {
+    if( e.propertyName !== 'transform' ) return; // Skip if it's not a transform.
+    this.classList.remove('playing');            // Remove the class 'playing'.
+  }
+
+  // Listen for any key press that has class 'key' on it. When the transition defined in the css ends, run the removeTransition() function.
+  const keys = document.querySelectorAll('.key');
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+
+  // When any key is pressed, run the playSound() function.
+  window.addEventListener('keydown', playSound);
 </script>
 
 
