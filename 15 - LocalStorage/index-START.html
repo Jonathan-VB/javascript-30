@@ -23,12 +23,20 @@
       <input type="text" name="item" placeholder="Item Name" required>
       <input type="submit" value="+ Add Item">
     </form>
+    <div class="form-controls">
+      <button class="form-controls__reset">Reset</button>
+      <button class="form-controls__check-all">Check All</button>
+      <button class="form-controls__uncheck-all">Uncheck All</button>
+    </div>
   </div>
 
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
   const items =  JSON.parse(localStorage.getItem('items')) || [];
+  const reset = document.querySelector('.form-controls__reset');
+  const checkAll = document.querySelector('.form-controls__check-all');
+  const uncheckAll = document.querySelector('.form-controls__uncheck-all');
 
   function addItem(e) {
     e.preventDefault();
@@ -63,9 +71,49 @@
     populateList(items, itemsList);
   }
 
+  /**
+   * Reset the Tapas form.
+   */
+  function resetForm() {
+    items.length = 0;                // Empty the items array.
+    localStorage.clear();            // Clear all data kept in localStorage.
+    populateList(items, itemsList);  // Populate the list - which will return an empty list now that items[] and localstorage are empty.
+  }
+
+  /**
+   * Check all the items in the Tapas form.
+   */
+  function checkAllForm() {
+    items.forEach(function(item) {
+      if(!item.done) item.done = true;  // Check if the item checkbox is not checked(false) - if it is then set it to be checked(true).
+    });
+
+    localStorage.setItem('items', JSON.stringify(items));  // Save the updated items to local storage.
+    populateList(items, itemsList);                        // Populate the list with the newly updated checked boxes.
+  }
+
+  /**
+   * Uncheck all the items in the Tapas form.
+   */
+  function uncheckAllForm() {
+    items.forEach(function(item) {
+      if(item.done) item.done = false;  // Check if the item checkbox is checked(true) - if it is then set it to be unchecked(false).
+    });
+
+    localStorage.setItem('items', JSON.stringify(items));  // Save the updated items to local storage.
+    populateList(items, itemsList);                        // Populate the list with the newly updated checked boxes.
+  }
+
+  /**
+   * Event Listeners.
+   */
   addItems.addEventListener('submit', addItem);
   itemsList.addEventListener('click', toggleDone);
-  populateList(items, itemsList);
+  reset.addEventListener('click', resetForm);
+  checkAll.addEventListener('click', checkAllForm);
+  uncheckAll.addEventListener('click', uncheckAllForm);
+
+  populateList(items, itemsList); // Populate the Tapas list.
 
 </script>
 
