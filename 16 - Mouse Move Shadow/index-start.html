@@ -35,6 +35,25 @@
   </style>
 
 <script>
+  const hero = document.querySelector('.hero');
+  const text = hero.querySelector('h1');
+
+  function shadow(e) {
+    // console.log(e);  // Log the event.
+    // const width = hero.offsetWidth;    // Get the width of .hero.
+    // const height = hero.offsetHeight;  // Get the height of .hero.
+    const { offsetWidth: width, offsetHeight: height } = hero; // Shorthand for the two lines above.
+
+    // target is the element it triggered on (hero).
+    // this is the element you listened on.
+    if(this !== e.target) {
+
+    }
+    let { offsetX: x, offsetY: y } = e; // Get the x and y coords of the mouse move event.
+    console.log(x, y);
+  }
+
+  hero.addEventListener('mousemove', shadow);  // Run the shadow function when the mouse moves over .hero.
 </script>
 </body>
 </html>
