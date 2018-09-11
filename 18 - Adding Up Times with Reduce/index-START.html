@@ -184,24 +184,37 @@
 
 <script>
 
+  // Get the NodeList for the data-time attributes and turn it into an Array.
+  // Array.from() converts the NodeList into an Array.
   const timeNodes = Array.from(document.querySelectorAll('[data-time]'));
+
   const seconds = timeNodes
-    .map(node => node.dataset.time)
-    .map(timeCode => {
-      const [mins, secs] = timeCode.split(':').map(parseFloat);
-      return (mins * 60) + secs;
+    .map(node => node.dataset.time)                     // Transform the array list into usable time strings.
+    .map(timeCode => {                                  // Map the array strings into timeCode.
+      const [mins, secs] = timeCode.split(':')          // Split the numbers that are separated by the ':' into their own variables.
+        .map(parseFloat);                               // parseFloat returns the array of numbered strings into actual numbers (Ex: "6:10" into 6 and 10).
+      return (mins * 60) + secs;                        // Time math.
       console.log(mins, secs);
     })
-    .reduce((total, vidSeconds) => total + vidSeconds);
+    .reduce((total, vidSeconds) => total + vidSeconds);  // Takes in the array of numbers and reduces them into one big number.
 
     let secondsLeft = seconds;
-    const hours = Math.floor(secondsLeft / 3600);
-    secondsLeft = secondsLeft % 3600;
-    console.log(secondsLeft);
 
+    // Math.floor to round number to nearest while number.
+    // Divide by 3600 as there are 3600 seconds in an hour.
+    const hours = Math.floor(secondsLeft / 3600);
+
+    // Modulo to return how many seconds are left after they have been evenly distrubuted into hours.
+    secondsLeft = secondsLeft % 3600;
+
+    // Math.floor to round number to nearest while number.
+    // Divide by 60 as there are 60 seconds in a min.
     const mins = Math.floor(secondsLeft / 60);
+
+    // Modulo to return how many seconds are left after they have been evenly distrubuted into mins.
     secondsLeft = secondsLeft % 60;
 
+    // Total time.
     console.log(hours + 'h ' + mins + 'm ' + secondsLeft + 's');
 
 </script>
