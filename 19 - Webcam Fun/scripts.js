@@ -21,4 +21,13 @@ function getVideo() {
     });
 }
 
+function paintToCanvas() {
+  const width = video.offsetWidth;
+  const height = video.offsetHeight;
+  canvas.width = width;
+  canvas.height = height;
+  console.log(width, height);
+}
+
+paintToCanvas();
 getVideo();
