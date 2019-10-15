@@ -27,6 +27,11 @@ function paintToCanvas() {
   canvas.width = width;
   canvas.height = height;
   console.log(width, height);
+
+  // Paint video to the canvas every 16 milliseconds
+  return setInterval(() => {
+    ctx.drawImage(video, 0, 0, width, height);
+  }, 16);
 }
 
 paintToCanvas();
