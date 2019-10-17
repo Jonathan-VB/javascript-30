@@ -34,5 +34,13 @@ function paintToCanvas() {
   }, 16);
 }
 
-paintToCanvas();
+function takePhoto() {
+  // Play the camera audio
+  snap.currentTime = 0;
+  snap.play();
+}
+
 getVideo();
+
+// Once the webcam is playing, run paintToCanvas
+video.addEventListener('canplay', paintToCanvas);
