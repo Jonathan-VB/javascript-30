@@ -38,6 +38,15 @@ function takePhoto() {
   // Play the camera audio
   snap.currentTime = 0;
   snap.play();
+
+  // Take data out of canvas, create download button to download snapshot onto users harddrive
+  const data = canvas.toDataURL('image/jpg');
+  const link = document.createElement('a');
+  link.href = data;
+  link.setAttribute('download', 'handsome');
+  link.textContent = 'Download Image';
+  strip.insertBefore(link, strip.firstChild);
+  console.log(data);
 }
 
 getVideo();
