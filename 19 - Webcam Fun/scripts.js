@@ -36,7 +36,7 @@ function paintToCanvas() {
   return setInterval(() => {
     ctx.drawImage(video, 0, 0, width, height);
     let pixels = ctx.getImageData(0, 0, width, height); // Take these pixels out
-    pixels = redEffect(pixels); // Mess with them
+    pixels = rgbSplit(pixels); // Mess with them
     ctx.putImageData(pixels, 0, 0); // Put them back
   }, 16);
 }
@@ -64,6 +64,18 @@ function redEffect(pixels) {
     pixels.data[i + 0] = pixels.data[i + 0] + 100; //red
     pixels.data[i + 1] = pixels.data[i + 1] - 50; // green
     pixels.data[i + 2] = pixels.data[i + 2] * 0.5; // blue
+    // pixels.data[i + 3] would be alpha, which we dont want to edit
+  }
+  return pixels;
+}
+
+// RGB Split filter
+function rgbSplit(pixels) {
+  // For loop that increments by 4
+  for(let i = 0; i < pixels.data.length; i+=4) {
+    pixels.data[i - 150] = pixels.data[i + 0]; // Move all reds back 150px
+    pixels.data[i + 100] = pixels.data[i + 1]; // Move all greens 100px forward
+    pixels.data[i - 150] = pixels.data[i + 2]; // Move all blues back 150px
     // pixels.data[i + 3] would be alpha, which we dont want to edit
   }
   return pixels;
