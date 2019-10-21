@@ -3,12 +3,14 @@
  * Use '$ npm install' to install browsersync then use '$ npm start' to run it (over localhost).
  */
 
+// Variables
 const video = document.querySelector('.player');
 const canvas = document.querySelector('.photo');
 const ctx = canvas.getContext('2d');
 const strip = document.querySelector('.strip');
 const snap = document.querySelector('.snap');
 
+// Start the webcam and play on the .player element
 function getVideo() {
   navigator.mediaDevices.getUserMedia({ video: true, audio: false })
     .then(localMediaStream => {
@@ -21,14 +23,16 @@ function getVideo() {
     });
 }
 
+// Play the video in the canvas
 function paintToCanvas() {
+  // Get the width and height of the video player
   const width = video.offsetWidth;
   const height = video.offsetHeight;
   canvas.width = width;
   canvas.height = height;
   console.log(width, height);
 
-  // Paint video to the canvas every 16 milliseconds
+  // Draw video to the canvas every 16 milliseconds
   return setInterval(() => {
     ctx.drawImage(video, 0, 0, width, height);
     let pixels = ctx.getImageData(0, 0, width, height);
@@ -37,6 +41,7 @@ function paintToCanvas() {
   }, 16);
 }
 
+// Executes when a photo is being taken
 function takePhoto() {
   // Play the camera audio
   snap.currentTime = 0;
@@ -52,6 +57,7 @@ function takePhoto() {
   console.log(data);
 }
 
+// Adds a red filter
 function redEffect(pixels) {
   for(let i = 0; i < pixels.length; i+=4) {
     pixels.data[i + 0] = pixels.data[i + 0] + 100; //red
