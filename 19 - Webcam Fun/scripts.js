@@ -35,9 +35,9 @@ function paintToCanvas() {
   // Draw video to the canvas every 16 milliseconds
   return setInterval(() => {
     ctx.drawImage(video, 0, 0, width, height);
-    let pixels = ctx.getImageData(0, 0, width, height);
-    pixels = redEffect(pixels);
-    ctx.putImageData(pixels, 0, 0);
+    let pixels = ctx.getImageData(0, 0, width, height); // Take these pixels out
+    pixels = redEffect(pixels); // Mess with them
+    ctx.putImageData(pixels, 0, 0); // Put them back
   }, 16);
 }
 
@@ -59,12 +59,13 @@ function takePhoto() {
 
 // Adds a red filter
 function redEffect(pixels) {
-  for(let i = 0; i < pixels.length; i+=4) {
+  // For loop that increments by 4
+  for(let i = 0; i < pixels.data.length; i+=4) {
     pixels.data[i + 0] = pixels.data[i + 0] + 100; //red
     pixels.data[i + 1] = pixels.data[i + 1] - 50; // green
     pixels.data[i + 2] = pixels.data[i + 2] * 0.5; // blue
+    // pixels.data[i + 3] would be alpha, which we dont want to edit
   }
-
   return pixels;
 }
 
