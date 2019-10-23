@@ -36,7 +36,10 @@ function paintToCanvas() {
   return setInterval(() => {
     ctx.drawImage(video, 0, 0, width, height);
     let pixels = ctx.getImageData(0, 0, width, height); // Take these pixels out
-    pixels = rgbSplit(pixels); // Mess with them
+
+    // Put any effect function here...
+    pixels = greenScreen(pixels); // Mess with them
+
     ctx.putImageData(pixels, 0, 0); // Put them back
   }, 16);
 }
@@ -78,6 +81,37 @@ function rgbSplit(pixels) {
     pixels.data[i - 150] = pixels.data[i + 2]; // Move all blues back 150px
     // pixels.data[i + 3] would be alpha, which we dont want to edit
   }
+  return pixels;
+}
+
+// Green screen effect
+function greenScreen(pixels) {
+  const levels = {}; // blank levels
+
+  // All 6 of the sliders input values
+  document.querySelectorAll('.rgb input').forEach((input) => {
+    levels[input.name] = input.value;
+  });
+
+  // Loop through all the pixels
+  for (i = 0; i < pixels.data.length; i = i + 4) {
+    red = pixels.data[i + 0];
+    green = pixels.data[i + 1];
+    blue = pixels.data[i + 2];
+    alpha = pixels.data[i + 3];
+
+    // If the RGB values are anywhere inbetween the min/max of the slider values, take it out.
+    if (red >= levels.rmin
+      && green >= levels.gmin
+      && blue >= levels.bmin
+      && red <= levels.rmax
+      && green <= levels.gmax
+      && blue <= levels.bmax) {
+      // take it out! Alpha is transparent at 0
+      pixels.data[i + 3] = 0;
+    }
+  }
+
   return pixels;
 }
 
