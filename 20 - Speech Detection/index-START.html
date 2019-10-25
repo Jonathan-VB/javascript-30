@@ -10,8 +10,26 @@
   </div>
 
 <script>
+// NOTE: This will only work in a server/localhost - run $ npm install then $ npm start to start localhost.
+  // SpeechRecognition is a golbal variables that lives in the browser. No external libraries needed!
   window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
+  const recognition = new SpeechRecognition();
+
+  // If interimResults is not true, you would need to stop speaking before your speech is recognised.
+  recognition.interimResults = true;
+
+  // Append p tags into the 'words' div.
+  let p = document.createElement('p');
+  const words = document.querySelector('.words');
+  words.appendChild(p);
+
+  // When result of speech recognition is returned...
+  recognition.addEventListener('result', e => {
+    console.log(e.results);
+  });
+
+  recognition.start();
 
 </script>
 
@@ -40,7 +58,7 @@
       position: relative;
       line-height: 3rem;
     }
-    
+
     p {
       margin: 0 0 3rem;
     }
