@@ -10,7 +10,7 @@
   </div>
 
 <script>
-// NOTE: This will only work in a server/localhost - run $ npm install then $ npm start to start localhost.
+  // NOTE: This will only work in a server/localhost - run $ npm install then $ npm start to start localhost.
   // SpeechRecognition is a golbal variables that lives in the browser. No external libraries needed!
   window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
@@ -26,8 +26,31 @@
 
   // When result of speech recognition is returned...
   recognition.addEventListener('result', e => {
-    console.log(e.results);
+    const transcript = Array.from(e.results)
+      .map(result => result[0])
+      .map(result => result.transcript)
+      .join('');
+
+      // Replace poop curse words with poop emoji!
+      const poopScript = transcript.replace(/poop|poo|shit|dump/gi, '💩');
+      p.textContent = poopScript;
+      // p.textContent = transcript; // transcript without poop checker
+
+      // If the user says "get the weather", run the weather app.
+      // if(transcript.includes('get the weather')) {
+      //   console.log('Run weather checker app');
+      // }
+
+      // If the user has stopped talking, add the transcript into a new p tag.
+      if (e.results[0].isFinal) {
+        p = document.createElement('p');
+        words.appendChild(p);
+      }
   });
+
+  // When the user stops talking, recognition ends.
+  // To make it keep listening we start listening again when the user has stopped talking.
+  recognition.addEventListener('end', recognition.start);
 
   recognition.start();
 
