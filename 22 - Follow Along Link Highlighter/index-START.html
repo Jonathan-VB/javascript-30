@@ -33,7 +33,8 @@
 
     // Listen for when someone mouses over a link
     function highlightLink() {
-      console.log("Highlight!");
+      const linkCoords = this.getBoundingClientRect();
+      console.log(linkCoords);
     }
 
     // Add the mouseenter event on each of our triggers, and run the highlightLink function
