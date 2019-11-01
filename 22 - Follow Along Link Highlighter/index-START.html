@@ -33,8 +33,11 @@
 
     // Listen for when someone mouses over a link
     function highlightLink() {
-      const linkCoords = this.getBoundingClientRect();
+      const linkCoords = this.getBoundingClientRect(); // Gets dimensions and coords of element.
       console.log(linkCoords);
+      highlight.style.width = `${linkCoords.width}px`; // Pull out the width of the element and add it to the highlight style
+      highlight.style.height = `${linkCoords.height}px`; // Pull out the height of the element and add it to the highlight style
+      highlight.style.transform = `translate(${linkCoords.left}px, ${linkCoords.top}px)`; // Style the left and top coords of element
     }
 
     // Add the mouseenter event on each of our triggers, and run the highlightLink function
