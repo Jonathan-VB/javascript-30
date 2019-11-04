@@ -29,10 +29,16 @@
     </div>
 
 <script>
+  // Contains the speech request (available in most modern browsers).
+  // It contains the content the speech service should read and information about how to read it (e.g. language, pitch and volume.)
   const msg = new SpeechSynthesisUtterance();
+
+  // The speech options.
   let voices = [];
   const voicesDropdown = document.querySelector('[name="voice"]');
   const options = document.querySelectorAll('[type="range"], [name="text"]');
+
+  // Stop and start buttons.
   const speakButton = document.querySelector('#speak');
   const stopButton = document.querySelector('#stop');
 </script>
