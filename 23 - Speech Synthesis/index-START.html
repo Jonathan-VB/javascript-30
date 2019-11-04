@@ -41,6 +41,18 @@
   // Stop and start buttons.
   const speakButton = document.querySelector('#speak');
   const stopButton = document.querySelector('#stop');
+
+  // Gets the text in the text area.
+  msg.text = document.querySelector('[name="text"]').value;
+
+  function populateVoices() {
+    // Override the voices array and populate it with built in voice options from your OS
+    voices = this.getVoices();
+    console.log(voices);
+  }
+
+  // When the voiceschanged event triggers, run populateVoices()
+  speechSynthesis.addEventListener('voiceschanged', populateVoices);
 </script>
 
 </body>
