@@ -49,6 +49,11 @@
     // Override the voices array and populate it with built in voice options from your OS
     voices = this.getVoices();
     console.log(voices);
+
+    // Map over the voices array and place the name/language as in the dropdown.
+    voicesDropdown.innerHTML = voices
+      .map(voice => `<option value="${voice.name}">${voice.name} (${voice.lang})</option>`)
+      .join('');
   }
 
   // When the voiceschanged event triggers, run populateVoices()
