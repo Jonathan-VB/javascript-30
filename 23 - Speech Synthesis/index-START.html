@@ -59,7 +59,7 @@
   function setVoice() {
     // Loop over the voice, find the speech that matches the selected dropdown voice.
     msg.voice = voices.find(voice => voice.name === this.value);
-    toggle(); 
+    toggle();
   }
 
   function toggle() {
@@ -67,11 +67,22 @@
     speechSynthesis.speak(msg); // Speak the message with the new voice.
   }
 
+  function setOption() {
+    console.log(this.name, this.value);
+
+    // In message, get what property was changed to what it was changed to.
+    msg[this.name] = this.value;
+    toggle();
+  }
+
   // When the voiceschanged event triggers, run populateVoices()
   speechSynthesis.addEventListener('voiceschanged', populateVoices);
 
   // When the voices dropdown is changed, run setVoices()
   voicesDropdown.addEventListener('change', setVoice);
+
+  // Loop through all our options and add the 'change' event listener to them.
+  options.forEach(option => option.addEventListener('change', setOption));
 </script>
 
 </body>
