@@ -62,9 +62,11 @@
     toggle();
   }
 
-  function toggle() {
+  function toggle(startOver = true) {
     speechSynthesis.cancel(); // Stop current voice over.
-    speechSynthesis.speak(msg); // Speak the message with the new voice.
+    if(startOver) {
+      speechSynthesis.speak(msg); // Speak the message with the new voice.
+    }
   }
 
   function setOption() {
@@ -83,6 +85,10 @@
 
   // Loop through all our options and add the 'change' event listener to them.
   options.forEach(option => option.addEventListener('change', setOption));
+
+  // Start and stop buttons.
+  speakButton.addEventListener('click', toggle);
+  stopButton.addEventListener('click', () => toggle(false));
 </script>
 
 </body>
