@@ -56,8 +56,16 @@
       .join('');
   }
 
+  function setVoice() {
+    // Loop over the voice, find the speech that matches the selected dropdown voice.
+    msg.voice = voices.find(voice => voice.name === this.value)
+  }
+
   // When the voiceschanged event triggers, run populateVoices()
   speechSynthesis.addEventListener('voiceschanged', populateVoices);
+
+  // When the voices dropdown is changed, run setVoices()
+  voicesDropdown.addEventListener('change', setVoice);
 </script>
 
 </body>
