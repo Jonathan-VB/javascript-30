@@ -52,6 +52,7 @@
 
     // Map over the voices array and place the name/language as in the dropdown.
     voicesDropdown.innerHTML = voices
+      .filter(voice => voice.lang.includes('en'))
       .map(voice => `<option value="${voice.name}">${voice.name} (${voice.lang})</option>`)
       .join('');
   }
