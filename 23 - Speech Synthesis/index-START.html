@@ -58,7 +58,13 @@
 
   function setVoice() {
     // Loop over the voice, find the speech that matches the selected dropdown voice.
-    msg.voice = voices.find(voice => voice.name === this.value)
+    msg.voice = voices.find(voice => voice.name === this.value);
+    toggle(); 
+  }
+
+  function toggle() {
+    speechSynthesis.cancel(); // Stop current voice over.
+    speechSynthesis.speak(msg); // Speak the message with the new voice.
   }
 
   // When the voiceschanged event triggers, run populateVoices()
