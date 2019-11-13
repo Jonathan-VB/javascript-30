@@ -53,9 +53,11 @@
     e.stopProagation();
   }
 
-  // Events bubble by default (capture is false), but we can change that by setting 'capture' to true
+  // Events bubble by default (capture is false), but we can change that by setting 'capture' to true.
+  // If once is set to true, the event will unbind itself. So it will listen for a click once and unbind so there's no future click events.
   divs.forEach(div => div.addEventListener('click', logText, {
-    capture: false
+    capture: false,
+    once: true
   }));
 </script>
 </body>
