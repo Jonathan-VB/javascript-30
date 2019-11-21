@@ -232,8 +232,18 @@
     background.classList.add('open');
 
     const dropdown = this.querySelector('.dropdown');
-    const dropdownCoords = dropdown.getBoundingClientRect();
-    console.log(dropdownCoords);
+    const dropdownCoords = dropdown.getBoundingClientRect(); // Get dropdown coords
+    // console.log(dropdownCoords);
+    const navCoords = nav.getBoundingClientRect(); // Get the main nav coords
+
+    const coords = {
+      height: dropdownCoords.height,
+      width: dropdownCoords.width
+    }
+
+    // Using the dropdown coords, apply the width and height of the background
+    background.style.setProperty('width', `${coords.width}px`);
+    background.style.setProperty('height', `${coords.height}px`);
   }
 
   function handleLeave() {
