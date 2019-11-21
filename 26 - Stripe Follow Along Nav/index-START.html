@@ -142,6 +142,7 @@
     display: none;
   }
 
+  /* We need to use separate classes for display and opacity transitions */
   .trigger-enter .dropdown {
     display: block;
   }
@@ -232,6 +233,7 @@
 
   function handleLeave() {
     console.log('Leave');
+    this.classList.remove('trigger-enter', 'trigger-enter-active');
   }
 
   // Trigger mouse enter/leave events for the li tags in the .cool nav
