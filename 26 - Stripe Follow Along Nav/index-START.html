@@ -239,8 +239,8 @@
     const coords = {
       height: dropdownCoords.height,
       width: dropdownCoords.width,
-      top: dropdownCoords.top,
-      left: dropdownCoords.left,
+      top: dropdownCoords.top - navCoords.top,
+      left: dropdownCoords.left - navCoords.left,
     }
 
     // Using the dropdown coords, apply the width and height of the background
