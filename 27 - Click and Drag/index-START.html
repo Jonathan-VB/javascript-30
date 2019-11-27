@@ -35,29 +35,31 @@
   </div>
 
 <script>
-  const slider = document.getSelector('.items');
+  const slider = document.querySelector('.items');
   let isDown = false;
   let startX;
   let scrollLeft;
 
   // Mouse down event on slider
   slider.addEventListener('mousedown', () => {
-
+    isDown = true;
   });
 
   // Mouse leave event on slider
   slider.addEventListener('mouseleave', () => {
-
+    isDown = false;
   });
 
   // Mouse up event on slider
   slider.addEventListener('mouseup', () => {
-
+    isDown = false;
   });
 
   // Mouse move event on slider
   slider.addEventListener('mousemove', () => {
-
+    if(!isDown) return; // Stop the function from running
+    console.log(isDown);
+    console.log('Do work!');
   });
 </script>
 
