@@ -65,7 +65,7 @@
     if(!isDown) return; // Stop the function from running
     e.preventDefault();
     const x = e.pageX - slider.offsetLeft; // Get the starting X coord when user clicks down.
-    const walk = x - startX; // How far have we dragged from the initial state.
+    const walk = (x - startX) * 3; // How far have we dragged from the initial state. Also move the slider 3px for every 1px dragged with mouse.
     console.log(walk);
 
     slider.scrollLeft = scrollLeft - walk;
