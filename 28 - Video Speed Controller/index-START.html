@@ -25,7 +25,10 @@ speed.addEventListener('mousemove', function(e) {
   const min = 0.4; // Min % of the bar
   const max = 4; // Max % of the bar
   const height = Math.round(percent * 100) + '%'; // Tidy up the percent const
-  console.log(height);
+  const playbackRate = percent * (max - min) + min; // Instead of 0 - 100, use 0.4 - 4
+
+  bar.style.height = height; // Style the dynamic bar height
+  bar.textContent = playbackRate.toFixed(2); // Dynamic % to 2 decimal places
 });
 </script>
 </body>
