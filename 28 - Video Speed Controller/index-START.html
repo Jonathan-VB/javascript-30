@@ -20,9 +20,12 @@ const bar = speed.querySelector('.speed-bar');
 const video = document.querySelector('.flex');
 
 speed.addEventListener('mousemove', function(e) {
-  const y = e.pageY - this.offsetTop; // offset the top since the bar isn't at the very top of the screen.
-  const percent = y / this.offsetHeight;
-  console.log(percent);
+  const y = e.pageY - this.offsetTop; // offset the top since the bar isn't at the very top of the screen
+  const percent = y / this.offsetHeight; // get % of the mouse position on the bar
+  const min = 0.4; // Min % of the bar
+  const max = 4; // Max % of the bar
+  const height = Math.round(percent * 100) + '%'; // Tidy up the percent const
+  console.log(height);
 });
 </script>
 </body>
