@@ -22,7 +22,9 @@ function timer(seconds) {
 
 // Display time left
 function displayTimeLeft(seconds) {
-  console.log(seconds);
+  const minutes = Math.floor(seconds / 60); // Grab the lower bound of the minutes (IE, just display 2 if the seconds is within the 2 minutes)
+  const remainderSeconds = seconds % 60;
+  console.log({minutes, remainderSeconds});
 }
 
-timer(10);
+timer(100);
