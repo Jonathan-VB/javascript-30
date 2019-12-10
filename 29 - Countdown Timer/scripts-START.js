@@ -1,5 +1,5 @@
-// Global countdown variable
 let countdown;
+const timerDisplay = document.querySelector('.display__time-left');
 
 function timer(seconds) {
   const now = Date.now(); // When the timer started - in milliseconds
@@ -24,7 +24,9 @@ function timer(seconds) {
 function displayTimeLeft(seconds) {
   const minutes = Math.floor(seconds / 60); // Grab the lower bound of the minutes (IE, just display 2 if the seconds is within the 2 minutes)
   const remainderSeconds = seconds % 60;
-  console.log({minutes, remainderSeconds});
+  const display = `${minutes}:${remainderSeconds}`;
+  timerDisplay.textContent = display;
+  // console.log({minutes, remainderSeconds});
 }
 
 timer(100);
