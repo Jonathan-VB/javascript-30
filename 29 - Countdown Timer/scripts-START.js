@@ -24,9 +24,9 @@ function timer(seconds) {
 function displayTimeLeft(seconds) {
   const minutes = Math.floor(seconds / 60); // Grab the lower bound of the minutes (IE, just display 2 if the seconds is within the 2 minutes)
   const remainderSeconds = seconds % 60;
-  const display = `${minutes}:${remainderSeconds}`;
+  const display = `${minutes}:${remainderSeconds < 10 ? '0' : '' }${remainderSeconds}`; // If remainderSeconds is less than 10, display a 0 infront of the number.
   timerDisplay.textContent = display;
   // console.log({minutes, remainderSeconds});
 }
 
-timer(100);
+timer(70);
