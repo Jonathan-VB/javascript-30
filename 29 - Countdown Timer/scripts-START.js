@@ -1,10 +1,12 @@
 let countdown;
 const timerDisplay = document.querySelector('.display__time-left');
+const endTime = document.querySelector('.display__end-time');
 
 function timer(seconds) {
   const now = Date.now(); // When the timer started - in milliseconds
   const then = now + seconds * 1000; // When it stops - Now plus the amount of seconds you want the timer to run
   displayTimeLeft(seconds);
+  displayEndTime(then);
 
   countdown = setInterval(() => {
     const secondsLeft = Math.round((then - Date.now()) / 1000); // in milliseconds so divide by 1000. Round to nearest whole number
@@ -28,6 +30,13 @@ function displayTimeLeft(seconds) {
   document.title = display; // Show timer in the browser tab
   timerDisplay.textContent = display;
   // console.log({minutes, remainderSeconds});
+}
+
+function displayEndTime(timestamp) {
+  const end = new Date(timestamp);
+  const hour = end.getHours();
+  const minutes = end.getMinutes();
+  endTime.textContent = `Be Back At ${hour}:${minutes}`;
 }
 
 timer(70);
