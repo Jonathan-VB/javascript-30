@@ -37,6 +37,11 @@
   const scoreBoard = document.querySelector('.score');
   const moles = document.querySelectorAll('.mole');
 
+  // Get a random time between two defined amounts of time
+  function randTime(min, max) {
+    return Math.round(Math.random() * (max - min) + min);
+  }
+
 </script>
 </body>
 </html>
