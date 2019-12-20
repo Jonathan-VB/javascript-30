@@ -61,7 +61,11 @@
     const time = randTime(200, 1000);
     const hole = randomHole(holes);
     hole.classList.add('up');
-    console.log(time,hole);
+
+    // The mole will go back into it's hole after the time in 'const time'
+    setTimeout(() => {
+      hole.classList.remove('up');
+  }, time);
   }
 
 </script>
