@@ -36,6 +36,7 @@
   const holes = document.querySelectorAll('.hole');
   const scoreBoard = document.querySelector('.score');
   const moles = document.querySelectorAll('.mole');
+  let lastHole;
 
   // Get a random time between two defined amounts of time
   function randTime(min, max) {
@@ -46,7 +47,13 @@
   function randomHole(holes) {
     const index = Math.floor(Math.random() * holes.length);
     const hole = holes[index];
-    console.log(hole);
+
+    if(hole == lastHole) {
+      console.log('Nope, same hole!');
+    }
+
+    lastHole = hole;
+    return hole;
   }
 
 </script>
