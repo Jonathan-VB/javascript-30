@@ -38,6 +38,7 @@
   const moles = document.querySelectorAll('.mole');
   let lastHole;
   let timeUp = false;
+  let score = 0;
 
   // Get a random time between two defined amounts of time
   function randTime(min, max) {
@@ -73,9 +74,20 @@
   function startGame() {
     scoreBoard.textContent = 0; // reset the score
     timeUp = false; // timeUp set to false so peep() can run
+    score = 0; // reset the score
     peep(); // run peep()
     setTimeout(() => timeUp = true, 10000); // end the game after 10000 seconds
   }
+
+  function bonk(e) {
+    console.log(e);
+    if(!e.isTrusted) return; // cheater! Detect if click is faked with JS
+    score++; // Add 1 score
+    this.classList.remove('up'); // Move the mole back in its hole
+    scoreBoard.textContent = score; // Add the score to the score board
+  }
+
+  moles.forEach(mole => mole.addEventListener('click', bonk));
 
 </script>
 </body>
