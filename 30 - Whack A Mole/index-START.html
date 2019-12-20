@@ -37,6 +37,7 @@
   const scoreBoard = document.querySelector('.score');
   const moles = document.querySelectorAll('.mole');
   let lastHole;
+  let timeUp = false;
 
   // Get a random time between two defined amounts of time
   function randTime(min, max) {
@@ -65,7 +66,15 @@
     // The mole will go back into it's hole after the time in 'const time'
     setTimeout(() => {
       hole.classList.remove('up');
-  }, time);
+      if(!timeUp) peep(); // If time is not up, run peep() again
+    }, time);
+  }
+
+  function startGame() {
+    scoreBoard.textContent = 0; // reset the score
+    timeUp = false; // timeUp set to false so peep() can run
+    peep(); // run peep()
+    setTimeout(() => timeUp = true, 10000); // end the game after 10000 seconds
   }
 
 </script>
